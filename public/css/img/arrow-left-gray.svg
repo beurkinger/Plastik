@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.33 12.07">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #c6c6c6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 0.5px;
+      }
+    </style>
+  </defs>
+  <title>arrow-left-gray</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="maquettes">
+      <g>
+        <line class="cls-1" x1="6.08" y1="0.25" x2="0.32" y2="6.01"/>
+        <line class="cls-1" x1="6.01" y1="11.82" x2="0.25" y2="6.06"/>
+      </g>
+    </g>
+  </g>
+</svg>

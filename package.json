@@ -1,0 +1,35 @@
+{
+  "name": "Plastik",
+  "version": "1.0.0",
+  "description": "Plastik website",
+  "main": "index.html",
+  "scripts": {
+    "build": "webpack",
+    "build-prod" : "webpack --config webpack.config.prod.js",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beurkinger/Plastik.git"
+  },
+  "keywords": [
+    "Plastik"
+  ],
+  "author": "Thibault Goehringer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beurkinger/Plastik/issues"
+  },
+  "homepage": "https://github.com/beurkinger/Plastik#readme",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-scrollify": "^1.0.14"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.3.2",
+    "webpack": "^2.3.2",
+    "webpack-dev-server": "^2.4.2"
+  }
+}
