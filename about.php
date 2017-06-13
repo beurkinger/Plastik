@@ -39,6 +39,11 @@
       Karen O’Rourke (Université Paris 1) <br/>
       Isabelle Rieusset-Lemarié (Université Paris 1) <br/>
     </p>
+    <p>
+      <img class="logo" src="./public/css/img/logo-cnrs.svg"/>
+      <img class="logo" src="./public/css/img/logo-acte.svg"/>
+      <img class="logo" src="./public/css/img/logo-sorbonne.svg"/>
+    </p>
   </article>
 </div>
 <?php require('footer.php') ?>

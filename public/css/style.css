@@ -186,7 +186,7 @@ body.fullscreen #main-menu ul  {
 #main-menu .number-content .summary {
   width: 100%;
   text-align: left;
-  max-height: 60vh;
+  max-height: 52vh;
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 10px 40px 10px 0;
@@ -252,6 +252,27 @@ body.fullscreen #main-menu ul  {
   text-decoration: underline;
 }
 
+#main-menu-footer {
+  box-sizing: border-box;
+  width: 190px;
+  font-size: 12px;
+  position: absolute; bottom: 24px; left: 0;
+  padding-left: 32Px;
+  width: 190px;
+}
+
+#main-menu-footer a {
+  text-decoration: none;
+}
+
+#main-menu-footer a:hover {
+  font-weight: bold;
+}
+
+#main-menu-footer a:first-child {
+  margin-right: 10px;
+}
+
 #main-container {
   display: block;
   height: 100%;
@@ -268,8 +289,10 @@ body.fullscreen #main-menu ul  {
 #about,
 #contribute,
 #contact,
+#credits,
 #author,
-#article {
+#article,
+#legals {
   box-sizing: border-box;
   width: 100%; height: 100%;
   background-color: rgba(0, 0, 0, 0.35);
@@ -393,13 +416,17 @@ body.fullscreen #main-menu ul  {
 
 #about article,
 #contribute article,
-#contact article {
-  max-width: 500px;
+#contact article,
+#credits article,
+#legals article {
+  max-width: 600px;
 }
 
 #about h1,
 #contribute h1,
-#contact h1 {
+#contact h1,
+#credits h1,
+#legals h1 {
   font-size: 28px ;
   letter-spacing: 3px;
   line-height: 100%;
@@ -410,17 +437,27 @@ body.fullscreen #main-menu ul  {
 
 #about .space-top,
 #contribute .space-top,
-#contact .space-top {
+#contact .space-top,
+#credits .space-top,
+#legals .space-top {
   margin-top: 40px;
 }
 
-#contact ul {
+#contact ul,
+#credits ul {
   margin: 20px 0;
   list-style: none;
 }
 
-#contact li {
-  padding-bottom: 10px;
+#contact li,
+#credits li {
+  padding-bottom: 14px;
+}
+
+#about .logo {
+  height: 80px;
+  width: auto;
+  margin: 30px 20px 30px 0;
 }
 
 #author {
@@ -671,7 +708,7 @@ body.fullscreen #article-header-container {
   background: #FFF;
   min-height: 100%;
   color: #000;
-  padding: 30px 55px;
+  padding: 30px 55px 40vh 55px;
 }
 
 #article-content .icons-top:first-of-type {
@@ -724,6 +761,11 @@ body.fullscreen #article-header-container {
 
 #article-body p {
   font-size: 1em;
+}
+
+#article-body a {
+  color: #000;
+  text-decoration: underline;
 }
 
 #quote {
@@ -785,7 +827,7 @@ body.fullscreen #article-header-container {
   background: #FFF;
   height: 100%;
   color: #000;
-  overflow: hidden;
+  overflow-x: hidden;
   box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.20);
   transition: width 350ms;
 }
@@ -796,21 +838,37 @@ body.fullscreen #article-aside {
 
 #article-aside-content {
   width: 100%; height: 100%;
-  padding-top: 320px;
+  /*padding-top: 320px;*/
+  padding-bottom: 50vh;
   padding-right: 40px;
-  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
-#article-aside-content {
-  width: 100%; height: 100%;
-  padding-right: 40px;
-  overflow-y: auto;
+#article-aside-content p {
+  margin: 14px 24px 24px 0;
+  padding: 0 0 14px 14px;
+  border-bottom: 1px solid #000;
+  font: normal 14px 'WarnockPro';
 }
 
-#article-aside-content .pic {
+#article-aside-content blockquote {
+  display: block;
 }
 
-#article-aside-content .pic-full {
+#article-aside-content blockquote:first-of-type {
+  margin-top: 320px;
+}
+
+#article-aside-content blockquote p:first-child {
+  margin:0; padding:0; border: 0; width: auto; height: auto; line-height: 0;
+}
+
+#article-aside-content blockquote p:last-child {
+  margin-bottom: 94px;
+}
+
+#article-aside-content blockquote.pic-full {
   z-index: 100;
   position: fixed;
   box-sizing: border-box;
@@ -821,7 +879,7 @@ body.fullscreen #article-aside {
   text-align: center;
 }
 
-#article-aside-content .pic:hover {
+#article-aside-content blockquote:hover {
   cursor: pointer;
 }
 
@@ -829,7 +887,7 @@ body.fullscreen #article-aside {
   width: 100%; height: auto;
 }
 
-#article-aside-content .pic-full img {
+#article-aside-content blockquote.pic-full img {
   width: auto;
   height: auto;
   margin-top: 8vh;
@@ -837,14 +895,7 @@ body.fullscreen #article-aside {
   max-height: 75%;
 }
 
-#article-aside-content p {
-  margin: 14px 24px 24px 0;
-  padding: 0 0 14px 14px;
-  border-bottom: 1px solid #000;
-  font: normal 14px 'WarnockPro';
-}
-
-#article-aside-content .pic-full p {
+#article-aside-content blockquote.pic-full p {
   margin: 4vh 0 0 0;
   padding: 0;
   border: 0;

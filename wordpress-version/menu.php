@@ -50,4 +50,8 @@ if (is_singular('post')) $page = 'article';
       </a>
     </li>
   </ul>
+  <div id="main-menu-footer">
+    <a href="#">Crédits</a>
+    <a href="#">Mentions légales</a>
+  </div>
 </nav>

@@ -55,21 +55,71 @@ $(function() {
     //Gestion du header de la page article
     let headerVisible = false;
     const articleHeader = $('#article-header-container');
-    const offset = $('#article-body')[0].offsetTop;
+    const picRefs = $('#article-body .pic-ref');
+    const pics = $('#article-aside blockquote');
+    const fullscreenBtn = $('.icon.resize');
+    const window = $('window');
+    const body = $('body');
+    const articleBody = $('#article-body');
+    const summary = $('#main-menu .summary');
+    const quoteInput = $('#quote-input');
+    const quoteMessage = $('#quote-message');
+    const aside = $('#article-aside');
+    const asideContent = $('#article-aside-content');
+
+    const articleOffset = $('#article-body')[0].offsetTop;
+
+    let lastScrolled = 0;
+    let currentPicRef = -1;
+
+    //Gestion du scroll sur l'article
     article.scroll(function () {
       let scrolled = article[0].scrollTop;
-      if (scrolled >= offset && !headerVisible) {
+      handleHeader(scrolled);
+      handlePicRef(scrolled, lastScrolled);
+      lastScrolled = scrolled;
+    });
+
+    //Function qui gère le header
+    function handleHeader (scrolled) {
+      if (scrolled >= articleOffset && !headerVisible) {
         headerVisible = true;
         articleHeader.addClass('show');
-      } else if (scrolled < offset && headerVisible) {
+      } else if (scrolled < articleOffset && headerVisible) {
         headerVisible = false;
         articleHeader.removeClass('show');
       }
-    });
+    }
+
+    //FUnction qui gère les références aux images
+    function handlePicRef (scrolled, lastScrolled) {
+      if ((scrolled > lastScrolled) && (currentPicRef + 1 < picRefs.length)) {
+        let nextPicRef = picRefs[currentPicRef + 1];
+        let picRefOffset = nextPicRef.offsetTop;
+        let total = scrolled + body.height() / 2;
+        if (total > picRefOffset) {
+          currentPicRef++;
+          scrollAsideToPic(nextPicRef);
+        }
+      } else if ((scrolled < lastScrolled) && (currentPicRef - 1 >= 0)) {
+        let nextPicRef = picRefs[currentPicRef - 1];
+        let picRefOffset = nextPicRef.offsetTop;
+        let total = scrolled + body.height() / 2;
+        if (total < picRefOffset) {
+          currentPicRef--;
+          scrollAsideToPic(nextPicRef);
+        }
+      }
+    }
+
+    function scrollAsideToPic(picRef) {
+      let ref = picRef.getAttribute('to');
+      let pic = $(ref);
+      let picOffset = pic[0].offsetTop;
+      asideContent.stop().animate({scrollTop : picOffset }, 1000, 'swing');
+    }
 
     //Gestion du mode fullscreen
-    const fullscreenBtn = $('.icon.resize');
-    const body = $('body');
     let fullscreenOn = false;
     fullscreenBtn.click(function () {
       if (!fullscreenOn) {
@@ -82,7 +132,6 @@ $(function() {
     });
 
     //Gestion de l'agrandissement des images
-    const pics = $('#article-aside .pic');
     pics.click(function () {
       let pic = $(this);
       if (!pic.hasClass('pic-full')) {
@@ -93,10 +142,10 @@ $(function() {
     });
 
     //Gestion de la modification de la taille du texte des articles
-    const articleBody = $('#article-body');
     $('#zoom .plus').click(() => zoomArticle(articleBody));
     $('#zoom .minus').click(() => zoomArticle(articleBody, true));
 
+    //Function qui gère l'aggrandissement du texte
     function zoomArticle(articleBody, back = false) {
       const increment = 1,
             mini = 12,
@@ -106,8 +155,6 @@ $(function() {
       if (fontSize <= max && fontSize >= mini ) articleBody.css('font-size', fontSize);
     }
 
-    //Gestion de la section sommaire du menu principal
-    const summary = $('#main-menu .summary');
 
     //Scrolle la section sommaire du menu principal jusqu'à la bonne entrée
     setTimeout (function() {
@@ -132,9 +179,6 @@ $(function() {
 
 
     //Gestion du bouton de copie de la citation
-    const quoteInput = $('#quote-input');
-    const quoteMessage = $('#quote-message');
-
     $('#quote-btn').click(function () {
       quoteInput.select();
       let copy;
@@ -150,6 +194,7 @@ $(function() {
         }
       }
     });
+
 
   }
 

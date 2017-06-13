@@ -36,4 +36,8 @@ $page = isset($page) ? $page : '';
       </a>
     </li>
   </ul>
+  <div id="main-menu-footer">
+    <a href="#">Crédits</a>
+    <a href="#">Mentions légales</a>
+  </div>
 </nav>

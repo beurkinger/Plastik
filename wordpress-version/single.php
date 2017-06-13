@@ -4,7 +4,7 @@
 get_header();
 
 /* Obtenir la liste des revues */
-$listREVUES = listREVUES();
+$listREVUES = listREVUES('reverse');
 
 /* Obtenir la liste des articles */
 $listARTICLES = listARTICLES();
@@ -34,10 +34,30 @@ $listARTICLES = listARTICLES();
 
 	/* Générer les notes de bas de page */
 	$note = 1; /* Numéro de la première note */
+	$contentWP = str_replace(array("\r\n", "\r", "\n", PHP_EOL, chr(10), chr(13), chr(10).chr(13)), "", $contentWP);
 	preg_match_all('/\{\{(.*?)\}\}/', $contentWP, $notes);
 	while (strpos($contentWP, '{{') !== false && strpos($contentWP, '}}') !== false) {
+		if ((strpos($contentWP, '{{') == false && strpos($contentWP, '}}') !== false) || (strpos($contentWP, '{{') !== false && strpos($contentWP, '}}') == false)) die('<strong style="color: #F00">Erreur d\'ouverture {{ fermeture }} dans les notes de bas de page');
+		$contentWP = preg_replace(array('/\{\{(.*?)\}\}/'), '<a id="texte_note-'.$note.'" name="texte_note-'.$note.'" href="#note-'.$note.'"><sup>'.$note.'</sup></a>', $contentWP, 1);
+		$note++;
+		if($note > 100) break; /* Casser une possible boucle infini si les notes de bas de page ont été mal remplit */
+	}
 
-		$pos = strpos($contentWP, '{{'); // Obtient la position de cette citation dans le texte
+	/* Générer les images intégrées */
+	$img = 1;
+	preg_match_all('/<blockquote(.*?)>((.|\n)*?)(<\/blockquote>)/i', $contentWP, $imgs);
+	while (strpos($contentWP, '<blockquote>') !== false && strpos($contentWP, '</blockquote>') !== false) {
+		if ((strpos($contentWP, '<blockquote>') == false && strpos($contentWP, '</blockquote>') !== false) || (strpos($contentWP, '<blockquote>') !== false && strpos($contentWP, '</blockquote>') == false)) die('<strong style="color: #F00">Erreur d\'ouverture / fermeture blockquote dans les images');
+		$contentWP = preg_replace('/<blockquote(.*?)>((.|\n)*?)(<\/blockquote>)/i', '<a id="texte_img-'.$img.'" name="texte_img-'.$img.'" href="#img-'.$img.'"><big>[Figure '.$img.']</big></a>', $contentWP, 1);
+		$img++;
+	}
+
+	/* Générer les notes de bas de page */
+/*	$note = 1; /* Numéro de la première note */
+/*	preg_match_all('/\{\{(.*?)\}\}/', $contentWP, $notes);
+	while (strpos($contentWP, '{{') !== false && strpos($contentWP, '}}') !== false) {
+
+		/*$pos = strpos($contentWP, '{{'); // Obtient la position de cette citation dans le texte
 
 		// Initialise les variables la premières fois
 		if (!isset($memoire)) $memoire = $pos;
@@ -48,17 +68,18 @@ $listARTICLES = listARTICLES();
 
 		if ($memoireCompare + ($longueur * 6) < $pos) {
 			$ecart = 0;
-		}
-		$contentWP = preg_replace(array('/\{\{(.*?)\}\}/'), '<sup>'.$note.'</sup><span class="note" style="margin-top:'.$ecart.'px"><sup>'.$note.'</sup>'.$notes[1][$note-1].'</span>', $contentWP, 1);
+		}*/
+/*		$contentWP = preg_replace(array('/\{\{(.*?)\}\}/'), '<sup>'.$note.'</sup><span class="note" style="margin-top:'.$ecart.'px"><sup>'.$note.'</sup>'.$notes[1][$note-1].'</span>', $contentWP, 1);
 
 		// Défini si la longueur (nb de caractères de la note de bas de page
-		$longueur = strlen($notes[1][$note-1]);
+		/*$longueur = strlen($notes[1][$note-1]);
 
 		$memoire = $pos;
-		$memoireCompare = $memoireCompare + ($longueur * 6);
+		$memoireCompare = $memoireCompare + ($longueur * 6);*/
 
-		$note++;
+/*		$note++;
 	}
+*/
 
 echo '<div id="article">
   <div id="article-header-container">
@@ -104,6 +125,7 @@ echo '<div id="article">
 
     if(isset($tableMatieres)) echo '</ul>';
     echo '</div>';
+
 		echo $contentWP;
 		//Guillaume SOULEZ, « Retour à l’envoyeur. », MEI : Information et Mediation #39 [En ligne], mis en ligne le 11 novembre 2016, consulté le 05 juin 2017. URL : http://mei-info.com/revue/39/57/
 		echo '<h1 class="title-light">Citer cet article</h1>';
@@ -118,6 +140,51 @@ echo '<div id="article">
 		</div>
   </article>
   <aside id="article-aside">
+		<div id="article-aside-content">';
+
+  /* Afficher : Images */
+  if (count($imgs[0]) > 0) {
+	  foreach ($imgs[0] as $key => $img) {
+		  $num = $key+1;
+
+		  /* Cas exceptionnel pour les nots de bas de page inclus dans une référence */
+		  if (is_array($img)) $img = $img[1];
+
+			echo $img;
+		}
+
+  }
+  /* FIN Images */
+
+	/* Afficher : Notes de bas de page */
+	if (count($notes[1]) > 0) {
+		foreach ($notes[1] as $key => $note){
+			$num = $key+1;
+
+			/* Cas exceptionnel pour les nots de bas de page inclus dans une référence */
+			if (is_array($note)) $note = $note[1];
+
+			/* Repère décalé pour permettre un lien ancre visible au centre de l'écran */
+			echo '<a id="note-'.$num.'" name="note-'.$num.'" ></a>';
+
+			echo '<p style="padding-left:30px; padding-right:15px;"><a href="#" style="font-family: DinMedium; color: #000; cursor:pointer; text-decoration: none; position: relative; top: 1.4em; left: -1.5em;"><!--<a href="#texte_note-'.$num.'" style="font-family: DinMedium; color: #000; cursor:pointer; text-decoration: none; position: relative; top: 1.4em; left: -1.5em;">-->'.$num.'</a><br>'.$note.'</p>';
+		}
+
+	}
+	/* FIN Notes de bas de page */
+ ?>
+ /*<style>
+blockquote img {
+	width: 100%;
+}
+#article-body a {
+	color: #F00;
+}
+</style>*/
+
+ <?php
+  echo '
+		<div>
   </aside>
 </div>';
 
