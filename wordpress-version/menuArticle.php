@@ -13,15 +13,19 @@ foreach ($listREVUES as $key => $revue) {
 
 	// Créer le lien vers ces numéros
 	if (isset($listARTICLES[$key]['edito'])) {
-		$tabArticle = reset($listARTICLES[$key]['edito']);
+		$tabARTICLES = reset($listARTICLES[$key]['edito']);
 	} else {
-		$tabArticle = reset($listARTICLES[$key]['article']);
+		$tabARTICLES = reset($listARTICLES[$key]['article']);
 	}
-		echo '<a href="'.$tabArticle['lien'].'" class="number';
+  // $link = array_key_exists('lien',)
+	// foreach ($tabARTICLES as $article) {
+		echo '<a href="'.$tabARTICLES['lien'].'" class="number';
     if($key == $tagRevue) echo ' active';
   	echo '">
         '.ltrim($key, "0").'
       </a>';
+		// break;
+	// }
 }
 echo '</div>
   <div class="number-content">

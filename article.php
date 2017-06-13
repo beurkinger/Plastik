@@ -83,24 +83,30 @@
           <strong>AOo</strong>, <em>Le leurre de Centaure</em>, 2011 (performance)
         </p>
       </div> -->
-      <blockquote id="img-1">
-        <p class="texte">
-          <img src="./public/img/articles/1.png" />
-        </p>
-        <p class="texte"><strong>AOo</strong>, <em>Le leurre de Centaure</em>, 2011 (performance)</p>
-      </blockquote>
-      <blockquote id="img-2">
-        <p class="texte">
-          <img src="./public/img/articles/1.png" />
-        </p>
-        <p class="texte"><strong>AOo</strong>, <em>Le leurre de Centaure</em>, 2011 (performance)</p>
-      </blockquote>
-      <blockquote id="img-3">
-        <p class="texte">
-          <img src="./public/img/articles/1.png" />
-        </p>
-        <p class="texte"><strong>AOo</strong>, <em>Le leurre de Centaure</em>, 2011 (performance)</p>
-      </blockquote>
+      <div class="pic" id="img1">
+        <blockquote>
+          <p class="texte">
+            <img src="./public/img/articles/1.png" />
+          </p>
+          <p class="texte"><strong>AOo</strong>, <em>Le leurre de Centaure</em>, 2011 (performance)</p>
+        </blockquote>
+      </div>
+      <div class="pic" id="img2">
+        <blockquote id="img-2">
+          <p class="texte">
+            <img src="./public/img/articles/1.png" />
+          </p>
+          <p class="texte"><strong>AOo</strong>, <em>Le leurre de Centaure</em>, 2011 (performance)</p>
+        </blockquote>
+      </div>
+      <div class="pic" id="img3">
+        <blockquote id="img-3">
+          <p class="texte">
+            <img src="./public/img/articles/1.png" />
+          </p>
+          <p class="texte"><strong>AOo</strong>, <em>Le leurre de Centaure</em>, 2011 (performance)</p>
+        </blockquote>
+      </div>
       <p style="padding-left:30px; padding-right:15px;"><a href="#" style="font-family: DinMedium; color: #000; cursor:pointer; text-decoration: none; position: relative; top: 1.4em; left: -1.5em;"><!--<a href="#texte_note-1" style="font-family: DinMedium; color: #000; cursor:pointer; text-decoration: none; position: relative; top: 1.4em; left: -1.5em;">-->1</a><br>Foucault (Michel), Des espaces autres (conférence au Cercle d’études architecturales, 14 mars 1967), in Architecture, Mouvement, Continuité, n°5, octobre 1984, pp. 46-49.</p>
     </div>
   </aside>

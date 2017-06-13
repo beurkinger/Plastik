@@ -38,7 +38,7 @@ $listARTICLES = listARTICLES();
 	preg_match_all('/\{\{(.*?)\}\}/', $contentWP, $notes);
 	while (strpos($contentWP, '{{') !== false && strpos($contentWP, '}}') !== false) {
 		if ((strpos($contentWP, '{{') == false && strpos($contentWP, '}}') !== false) || (strpos($contentWP, '{{') !== false && strpos($contentWP, '}}') == false)) die('<strong style="color: #F00">Erreur d\'ouverture {{ fermeture }} dans les notes de bas de page');
-		$contentWP = preg_replace(array('/\{\{(.*?)\}\}/'), '<a id="texte_note-'.$note.'" name="texte_note-'.$note.'" href="#note-'.$note.'"><sup>'.$note.'</sup></a>', $contentWP, 1);
+		$contentWP = preg_replace(array('/\{\{(.*?)\}\}/'), '<a id="texte_note-'.$note.'" class="note-ref" name="texte_note-'.$note.'" href="#note-'.$note.'"><sup>'.$note.'</sup></a>', $contentWP, 1);
 		$note++;
 		if($note > 100) break; /* Casser une possible boucle infini si les notes de bas de page ont été mal remplit */
 	}
@@ -48,7 +48,7 @@ $listARTICLES = listARTICLES();
 	preg_match_all('/<blockquote(.*?)>((.|\n)*?)(<\/blockquote>)/i', $contentWP, $imgs);
 	while (strpos($contentWP, '<blockquote>') !== false && strpos($contentWP, '</blockquote>') !== false) {
 		if ((strpos($contentWP, '<blockquote>') == false && strpos($contentWP, '</blockquote>') !== false) || (strpos($contentWP, '<blockquote>') !== false && strpos($contentWP, '</blockquote>') == false)) die('<strong style="color: #F00">Erreur d\'ouverture / fermeture blockquote dans les images');
-		$contentWP = preg_replace('/<blockquote(.*?)>((.|\n)*?)(<\/blockquote>)/i', '<a id="texte_img-'.$img.'" name="texte_img-'.$img.'" href="#img-'.$img.'"><big>[Figure '.$img.']</big></a>', $contentWP, 1);
+		$contentWP = preg_replace('/<blockquote(.*?)>((.|\n)*?)(<\/blockquote>)/i', '<a class="pic-ref" id="texte_img-'.$img.'" name="texte_img-'.$img.'" href="#img-'.$img.'" to="#img-'.$img.'">[Figure '.$img.']</a>', $contentWP, 1);
 		$img++;
 	}
 
@@ -150,7 +150,13 @@ echo '<div id="article">
 		  /* Cas exceptionnel pour les nots de bas de page inclus dans une référence */
 		  if (is_array($img)) $img = $img[1];
 
+		  /* Repère décalé pour permettre un lien ancre visible au centre de l'écran */
+		  // echo '<a id="img-'.$num.'" name="img-'.$num.'" ></a>';
+
+		  // echo '<p style="padding-left:30px; padding-right:15px;"><a href="#" style="font-family: DinMedium; color: #000; cursor:pointer; text-decoration: none; position: relative; top: 1.4em; left: -1.5em;"><!--<a href="#texte_img-'.$num.'" style="font-family: DinMedium; color: #000; cursor:pointer; text-decoration: none; position: relative; top: 1.4em; left: -1.5em;">-->Fig. '.$num.'</a><br>'.$img.'</p>';
+			echo '<div class="pic" id="img-'.$num.'">';
 			echo $img;
+			echo '</div>';
 		}
 
   }
@@ -172,17 +178,6 @@ echo '<div id="article">
 
 	}
 	/* FIN Notes de bas de page */
- ?>
- /*<style>
-blockquote img {
-	width: 100%;
-}
-#article-body a {
-	color: #F00;
-}
-</style>*/
-
- <?php
   echo '
 		<div>
   </aside>

@@ -14,7 +14,7 @@ $(function() {
 
   //Gestion de l'animation du menu principal
   const menuEntries = $('#main-menu > ul > li > a.inactive');
-  let menuTexts = [];
+  var menuTexts = [];
   for (let i = 0; i < menuEntries.length; i++) {
     menuTexts[i] = menuEntries[i].textContent.trim();
     (function (entry) {
@@ -35,19 +35,6 @@ $(function() {
     });
   }
 
-  //Function récursive qui vide le texte des éléments du menu
-  //Non utilisée
-  function emptyEntry(entry) {
-    setTimeout(function () {
-      let nbChars = entry.textContent.trim().length;
-      if (nbChars > 2) {
-        let text = entry.textContent.trim();
-        entry.textContent = text.slice(0,1) + text.slice(2);
-        emptyEntry(entry);
-      }
-    }, 100);
-  }
-
   //Sections d'éléments qui ne concernent que la page article
   const article = $('#article');
   if (article.length) {
@@ -56,12 +43,14 @@ $(function() {
     let headerVisible = false;
     const articleHeader = $('#article-header-container');
     const picRefs = $('#article-body .pic-ref');
-    const pics = $('#article-aside blockquote');
+    const pics = $('#article-aside .pic');
     const fullscreenBtn = $('.icon.resize');
-    const window = $('window');
     const body = $('body');
     const articleBody = $('#article-body');
     const summary = $('#main-menu .summary');
+    const summaryNext = $('#main-menu .next');
+    const summaryPrevious = $('#main-menu .previous');
+    const quoteBtn = $('#quote-btn');
     const quoteInput = $('#quote-input');
     const quoteMessage = $('#quote-message');
     const aside = $('#article-aside');
@@ -166,8 +155,8 @@ $(function() {
       }
     }, 750);
 
-    $('#main-menu .next').click(() => scrollSummary(summary));
-    $('#main-menu .previous').click(() => scrollSummary(summary, true));
+    summaryNext.click(() => scrollSummary(summary));
+    summaryPrevious.click(() => scrollSummary(summary, true));
 
     //Fonction qui scroll le sommaire du menu principal
     function scrollSummary (summary, back = false) {
@@ -179,7 +168,7 @@ $(function() {
 
 
     //Gestion du bouton de copie de la citation
-    $('#quote-btn').click(function () {
+    quoteBtn.click(function () {
       quoteInput.select();
       let copy;
       try {
@@ -194,7 +183,6 @@ $(function() {
         }
       }
     });
-
 
   }
 
