@@ -186,4 +186,6 @@ $(function() {
 
   }
 
+  $('#search .search-empty').click(() => $('#search .search-input').val(''));
+
 });
