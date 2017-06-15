@@ -87,6 +87,12 @@ a {
   letter-spacing: 2px;
 }
 
+#main-menu h1 a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #FFF;
+}
+
 #main-menu ul {
   display: block;
   list-style: none;
@@ -122,12 +128,11 @@ a {
 
 body.fullscreen #main-menu  {
   background: #FFF;
-  color: #000;
   width: 190px;
 }
 
-body.fullscreen #main-menu h1  {
-  /*border-color: #000;*/
+body.fullscreen #main-menu h1 a  {
+  color: #000;
 }
 
 body.fullscreen #main-menu ul  {
@@ -299,6 +304,7 @@ body.fullscreen #main-menu ul  {
   width: 100%; height: 100%;
   background-color: rgba(0, 0, 0, 0.35);
   padding: 84px 0 0 272px;
+  /*padding: 84px 19% 0 400px;*/
   overflow-y: scroll;
 }
 
@@ -422,7 +428,8 @@ body.fullscreen #main-menu ul  {
 #credits article,
 #legals article,
 #error article {
-  max-width: 600px;
+  max-width: 750px;
+  margin: 0 14%;
 }
 
 #about h1,
@@ -431,11 +438,11 @@ body.fullscreen #main-menu ul  {
 #credits h1,
 #legals h1,
 #error h1 {
-  font-size: 28px ;
-  letter-spacing: 3px;
+  font-size: 32px ;
+  letter-spacing: 5px;
   line-height: 100%;
   margin: 15px 0 30px 0;
-  padding-bottom: 25px;
+  padding-bottom: 32px;
   border-bottom: 1px solid #FFF;
 }
 
@@ -468,15 +475,21 @@ body.fullscreen #main-menu ul  {
 #author,
 #search {
   position: relative;
-  padding: 0 262px 0 222px;
+  padding: 0 272px 0 222px;
 }
 
 #author .content,
 #search .content {
+  box-sizing: border-box;
   background: #FFF;
   min-height: 100%;
   color: #000;
-  padding: 0 55px;
+  padding: 0 14% 84px 14%;
+}
+
+#author .content article,
+#search .content article {
+  max-width: 750px;
 }
 
 #author .back {
@@ -516,14 +529,14 @@ body.fullscreen #main-menu ul  {
   position: absolute; top: 0; right: 0;
   box-sizing: border-box;
   padding: 162px 0 30px 0;
-  width: 262px;
+  width: 272px;
   background: #000;
 }
 
 #author aside h2 {
   position:relative;
   box-sizing: border-box;
-  font: bold 17px 'WarnockPro';
+  font: bold 20px 'WarnockPro';
   line-height: 100%;
   padding: 0 30px 12px 30px;
   border-bottom: 1px solid #FFF;
@@ -531,12 +544,12 @@ body.fullscreen #main-menu ul  {
 
 #author aside p {
   margin: 30px 30px 60px 30px;
-  font: normal 14px 'WarnockPro';
+  word-wrap: break-word;
 }
 
 #article,
 #article-header-container {
-  padding: 0 180px 0 400px;
+  padding: 0 19% 0 400px;
   background: #FFF;
 }
 
@@ -548,7 +561,7 @@ body.fullscreen #main-menu ul  {
 #article .icons {
   position: relative;
   float: right;
-  right: -35px;
+  right: -14%;
 }
 
 #article .icons::after {
@@ -655,7 +668,7 @@ body.fullscreen #article .icons .resize:hover {
 
 body.fullscreen #article,
 body.fullscreen #article-header-container {
-  padding: 0 280px 0 190px;
+  padding: 0 30% 0 190px;
 }
 
 #article-header-container {
@@ -676,12 +689,11 @@ body.fullscreen #article-header-container {
 #article-header {
   position: relative;
   box-sizing: border-box;
-  margin-left: 55px;
-  width: (100% - 55px); height: 100%;
+  width: 100%; height: 100%;
   background: #FFF;
   border-bottom: 1px solid #000;
   color: #000;
-  padding: 18px 110px 0 0;
+  padding: 18px 110px 0 14%;
 }
 
 #article-header .icons {
@@ -703,7 +715,7 @@ body.fullscreen #article-header-container {
 
 
 #article-header h1 {
-  position: absolute; left:0; bottom: 12px;
+  position: absolute; left:14%; bottom: 12px;
   font: bold 24px 'WarnockPro';
   line-height: 120%;
   margin-right: 110px;
@@ -717,7 +729,7 @@ body.fullscreen #article-header-container {
   background: #FFF;
   min-height: 100%;
   color: #000;
-  padding: 30px 55px 40vh 55px;
+  padding: 30px 14% 40vh 14%;
 }
 
 #article-content .icons-top:first-of-type {
@@ -743,7 +755,7 @@ body.fullscreen #article-header-container {
 }
 
 #article-content .divider {
-  display: block; width: calc(100% + 55px); height: 0;
+  display: block; width: 200%; height: 0;
   margin: 10px 0 20px 0;
   border-bottom: 1px solid #000;
 }
@@ -751,17 +763,29 @@ body.fullscreen #article-header-container {
 #article-body {
   padding-top: 40px;
   font-size: 15px;
+  max-width: 750px;
 }
 
 #article-body h1 {
   position: relative;
   display: inline-block;
-  left: -55px;
-  padding: 8px 55px;
-  border-bottom: 1px solid #000;
-  margin: 50px 0 30px 0;
+  /*left: -55px;*/
+  /*padding: 8px 55px;*/
+  /*padding: 8px 0;*/
+  /*border-bottom: 1px solid #000;*/
+  margin: 60px 0 30px 0;
   font: bold 1.74em 'WarnockPro';
   letter-spacing: 1px;
+}
+
+#article-body h1::after {
+  position: absolute;
+  display: block;
+  width: 1000px; height: 8px;
+  content: " ";
+  right: 0;
+  border-bottom: 1px solid #000;
+  /*width*/
 }
 
 #article-body h1.title-light {
@@ -786,7 +810,7 @@ body.fullscreen #article-header-container {
 }
 
 #quote {
-
+  /*max-width: 750px;*/
 }
 
 #quote-btn {
@@ -836,11 +860,12 @@ body.fullscreen #article-header-container {
   font-weight: bold;
 }
 
+
 #article-aside {
   z-index: 50;
   position: fixed; top: 0; right: 0;
   box-sizing: border-box;
-  width: 180px;
+  width: 19%;
   background: #FFF;
   height: 100%;
   color: #000;
@@ -850,7 +875,7 @@ body.fullscreen #article-header-container {
 }
 
 body.fullscreen #article-aside {
-  width: 280px;
+  width: 30%;
 }
 
 #article-aside-content {
@@ -929,7 +954,7 @@ body.fullscreen #article-aside {
 }
 
 #search form {
-  margin-bottom: 27px;
+  margin-bottom: 100px;
 }
 
 #search .content .search-input {
@@ -938,6 +963,10 @@ body.fullscreen #article-aside {
   width: 70%; height: 35px;
   max-width: 400px;
   vertical-align: bottom;
+}
+
+#search .content .search-input::placeholder {
+  color: #BBB;
 }
 
 #search .content .search-btn {
@@ -989,4 +1018,62 @@ cursor: pointer;
   margin: 14px 0;
   font-size: 14px;
   color: #808080;
+}
+
+@media screen and (min-width: 1280px) {
+  .mag-content,
+  #magazines,
+  #authors {
+    padding-left: 25%;
+  }
+
+  body,
+  #article-body {
+    font-size: 16px;
+  }
+
+  #author,
+  #search {
+    padding-right: 350px;
+  }
+
+  #author aside,
+  #search aside {
+    width: 350px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+
+  .mag-content,
+  #magazines,
+  #authors {
+    padding-left: 33%;
+  }
+
+  body {
+    font-size: 17px;
+  }
+  #article-body {
+    font-size: 18px;
+  }
+
+  body.fullscreen #article,
+  body.fullscreen #article-header-container {
+    padding: 0 25% 0 190px;
+  }
+
+  body.fullscreen #article-aside {
+    width: 25%;
+  }
+
+  #author,
+  #search {
+    padding-right: 450px;
+  }
+
+  #author aside,
+  #search aside {
+    width: 450px;
+  }
 }

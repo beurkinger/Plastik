@@ -2,7 +2,7 @@
 $page = isset($page) ? $page : '';
  ?>
 <nav id="main-menu" class="<?php echo $page; ?>">
-  <h1>Plastik</h1>
+  <h1><a href="./">Plastik</a></h1>
   <ul>
     <li>
         <a href="index.php" class="inactive">

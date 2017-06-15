@@ -21,8 +21,8 @@ foreach ($listREVUES as $key => $revue) {
 	  echo '
 	  <div class="mag" style="background: url(\''.$revue['img_full'].'\') center center / cover no-repeat fixed;">
 		<div class="mag-content">
-		  <div class="boxes-container mag-boxes" style="margin-left: '.rand(0, 50).'%; margin-top: '.rand(0, 25).'%;">';
-		  
+		  <div class="boxes-container mag-boxes" style="margin-left: '.rand(0, 20).'%; margin-top: '.rand(0, 25).'%;">';
+
   // Créer le lien vers ces numéros
   if (isset($listARTICLES[$revue['numero']]['edito'])) {
 	  $tabARTICLES = $listARTICLES[$revue['numero']]['edito'];
@@ -33,7 +33,7 @@ foreach ($listREVUES as $key => $revue) {
 	  echo '<a href="'.$article['lien'].'">';
 	  break;
   }
-		  
+
 			echo '<div class="box number-box">
 			  <h4>Nr</h4>
 			  <h2>'.$revue['numero'].'</h2>
