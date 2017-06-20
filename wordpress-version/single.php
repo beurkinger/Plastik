@@ -83,9 +83,14 @@ $listARTICLES = listARTICLES();
 
 echo '<div id="article">
   <div id="article-header-container">
-    <div id="article-header">';
-		  require('articleIcons.php');
-      echo '<h2 class="article-author">'.$tagAuteur.'</h2>
+    <div id="article-header">
+			<div class="icons">
+				<div class="resize-container">
+					<div class="resize-text">Mode plein écran</div>
+					<div class="icon resize"></div>
+				</div>
+			</div>
+		  <h2 class="article-author">'.$tagAuteur.'</h2>
       <h3 class="article-infos">Nr '.$tagRevue.' . '.get_the_date('j F Y')/*$listREVUES[$tagRevue]['date_full']*/.'</h3>
       <h1>
         '.esc_attr(get_the_title()).'
@@ -93,34 +98,46 @@ echo '<div id="article">
     </div>
   </div>
   <article id="article-content">';
-    require('articleIcons.php');
   	echo '<h1 class="article-title">
       '.esc_attr(get_the_title()).'
     </h1>
     <hr class="divider"></hr>
-    <div id="zoom" class="icons">
-      <span class="minus">-</span>
-      <span class="letters">
-        <span>A</span><span>A</span><span>A</span>
-      </span>
-      <span class="plus">+</span>
+		<div class="icons">
+      <div class="resize-container">
+        <div class="resize-text">Mode plein écran</div>
+        <div class="icon resize"></div>
+      </div>
+      <div id="zoom">
+        <div class="icon plus"></div>
+        <div class="letters">
+          <span>A</span><span>A</span><span>A</span>
+        </div>
+        <div class="icon minus"></div>
+      </div>
     </div>
     <h2 class="article-author">'.$tagAuteur.'</h2>
-    <h3 class="article-infos">Nr '.$tagRevue.' . '.get_the_date('j F Y')/*$listREVUES[$tagRevue]['date_full']*/.'</h3>
-    <div id="article-body">
+    <h3 class="article-infos">Nr '.$tagRevue.' . '.get_the_date('j F Y')/*$listREVUES[$tagRevue]['date_full']*/.'</h3>';
+		if (isset($pdf) && trim($pdf) != "") {
+	    echo '<a href="'.$pdf.'" id="download-btn">Télécharger le PDF</a>';
+	  }
+		echo '<div id="article-body">
       <div id="article-summary">';
 
 		/* Parcourir l'article pour récupérer l'ensemble des titres puis créer le menu */
-		preg_match_all('|<h1>(.*)</h1>|', $contentWP, $h1Titles);
+		$contentWP  = preg_replace('/<h1 .*?class="(.*?)">(.*?)<\/h1>/','<h1>$2</h1>', $contentWP);
+    	preg_match_all("/<h1>(.*?)<\/h1>/", $contentWP, $h1Titles);
+
 		foreach ($h1Titles['1'] as $h1Title) {
 			if(!isset($tableMatieres)) echo '<h1 class="title-light">Table des matières</h1><ul>'; $tableMatieres = 1;
 			echo '<li><a href="#'.filter($h1Title).'">'.$h1Title.'</a></li>';
 		}
 
+
+
 		/* Rajouter les liens ancres dans l'article */
 		while (strpos($contentWP, '<h1>') !== false) {
-			preg_match('|<h1>(.*)</h1>|', $contentWP, $h1Titles);
-			$contentWP = preg_replace('|<h1>(.*)</h1>|', '<h1 name="'.filter($h1Titles[1]).'" id="'.filter($h1Titles[1]).'">'.$h1Titles[1].'</h1>', $contentWP, 1);
+			preg_match("/<h1>(.*?)<\/h1>/", $contentWP, $h1Titles);
+			$contentWP = preg_replace("/<h1>(.*?)<\/h1>/", '<h1 name="'.filter($h1Titles[1]).'" id="'.filter($h1Titles[1]).'">'.$h1Titles[1].'</h1>', $contentWP, 1);
 		}
 
     if(isset($tableMatieres)) echo '</ul>';

@@ -3,7 +3,7 @@ if (is_singular('post')) $page = 'article';
 ?>
 
 <nav id="main-menu" class="<?php echo $page; ?>">
-  <h1><a href="./">Plastik</a></h1>
+  <h1><a href="/">Plastik</a></h1>
   <ul>
     <li>
         <?php $class = is_page('accueil') ? 'active' : 'inactive' ?>
@@ -22,7 +22,7 @@ if (is_singular('post')) $page = 'article';
       <a href="/numeros" class="<?php echo $class; ?>">
         N<span>uméro</span>s
       </a>
-      <?php if (is_singular('post')) require($themeUrl.'menuArticle.php'); ?>
+      <?php if (is_singular('post')) require('menuArticle.php'); ?>
     </li>
     <li>
       <?php $class = is_page('auteurs') || is_singular('auteur') ? 'active' : 'inactive' ?>
@@ -43,15 +43,13 @@ if (is_singular('post')) $page = 'article';
       </a>
     </li>
     <li>
-      <a href="/recherche" class="<?php echo $class; ?>">
-        <!--
+      <a href="/?s=" class="<?php echo $class; ?>">
         <img src="<?php echo themeCallImage('search.svg'); ?>" alt="Rechercher un article" class="loupe" />
-         -->
       </a>
     </li>
   </ul>
   <div id="main-menu-footer">
-    <a href="#">Crédits</a>
-    <a href="#">Mentions légales</a>
+    <a href="/credits">Crédits</a>
+    <a href="/mentions-legales">Mentions légales</a>
   </div>
 </nav>

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10330,6 +10330,226 @@ return jQuery;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _jqueryScrollify = __webpack_require__(2);
+
+var _jqueryScrollify2 = _interopRequireDefault(_jqueryScrollify);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _jquery2.default)(function () {
+
+  //Gestion du scroll sur la page d'accueil
+  _jquery2.default.scrollify({
+    section: ".mag",
+    touchScroll: true,
+    scrollbars: false,
+    scrollSpeed: 600,
+    easing: "linear"
+  });
+
+  //Gestion de l'animation du menu principal
+  var menuEntries = (0, _jquery2.default)('#main-menu > ul > li > a.inactive');
+  var menuTexts = [];
+  for (var i = 0; i < menuEntries.length; i++) {
+    menuTexts[i] = menuEntries[i].textContent.trim();
+    (function (entry) {
+      setTimeout(function () {
+        return collapseEntry(entry);
+      }, 750);
+    })(menuEntries[i]);
+    menuEntries.eq(i).mouseover(function () {
+      (0, _jquery2.default)(this).find("span").width('auto');
+    });
+    menuEntries.eq(i).mouseleave(function () {
+      collapseEntry(this);
+    });
+  }
+
+  //Function qui raccourcit le texte des éléments du menu
+  function collapseEntry(entry) {
+    (0, _jquery2.default)(entry).find("span").animate({
+      width: '0'
+    });
+  }
+
+  //Sections d'éléments qui ne concernent que la page article
+  var article = (0, _jquery2.default)('#article');
+  if (article.length) {
+
+    //Function qui gère le header
+    var handleHeader = function handleHeader(scrolled) {
+      if (scrolled >= articleOffset && !headerVisible) {
+        headerVisible = true;
+        articleHeader.addClass('show');
+      } else if (scrolled < articleOffset && headerVisible) {
+        headerVisible = false;
+        articleHeader.removeClass('show');
+      }
+    };
+
+    //FUnction qui gère les références aux images
+
+
+    var handlePicRef = function handlePicRef(scrolled, lastScrolled) {
+      if (scrolled > lastScrolled && currentPicRef + 1 < picRefs.length) {
+        var nextPicRef = picRefs[currentPicRef + 1];
+        var picRefOffset = nextPicRef.offsetTop;
+        var total = scrolled + body.height() / 2;
+        if (total > picRefOffset) {
+          currentPicRef++;
+          scrollAsideToPic(nextPicRef);
+        }
+      } else if (scrolled < lastScrolled && currentPicRef - 1 >= 0) {
+        var _nextPicRef = picRefs[currentPicRef - 1];
+        var _picRefOffset = _nextPicRef.offsetTop;
+        var _total = scrolled + body.height() / 2;
+        if (_total < _picRefOffset) {
+          currentPicRef--;
+          scrollAsideToPic(_nextPicRef);
+        }
+      }
+    };
+
+    var scrollAsideToPic = function scrollAsideToPic(picRef) {
+      var ref = picRef.getAttribute('to');
+      var pic = (0, _jquery2.default)(ref);
+      var picOffset = pic[0].offsetTop;
+      asideContent.stop().animate({ scrollTop: picOffset }, 1000, 'swing');
+    };
+
+    //Gestion du mode fullscreen
+
+
+    //Function qui gère l'aggrandissement du texte
+    var zoomArticle = function zoomArticle(articleBody) {
+      var back = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      var increment = 1,
+          mini = 12,
+          max = 24;
+      var fontSize = parseInt(articleBody.css('font-size'));
+      fontSize += back ? -increment : increment;
+      if (fontSize <= max && fontSize >= mini) articleBody.css('font-size', fontSize);
+    };
+
+    //Scrolle la section sommaire du menu principal jusqu'à la bonne entrée
+
+
+    //Fonction qui scroll le sommaire du menu principal
+    var scrollSummary = function scrollSummary(summary) {
+      var back = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      var scrollIncrement = 150;
+      var scroll = summary.scrollTop() || 0;
+      scroll += back ? -scrollIncrement : scrollIncrement;
+      if (scroll) summary.stop().animate({ scrollTop: scroll }, 250, 'swing');
+    };
+
+    //Gestion du bouton de copie de la citation
+
+
+    //Gestion du header de la page article
+    var headerVisible = false;
+    var articleHeader = (0, _jquery2.default)('#article-header-container');
+    var picRefs = (0, _jquery2.default)('#article-body .pic-ref');
+    var pics = (0, _jquery2.default)('#article-aside .pic');
+    var fullscreenBtn = (0, _jquery2.default)('.icon.resize');
+    var body = (0, _jquery2.default)('body');
+    var articleBody = (0, _jquery2.default)('#article-body');
+    var summary = (0, _jquery2.default)('#main-menu .summary');
+    var summaryNext = (0, _jquery2.default)('#main-menu .next');
+    var summaryPrevious = (0, _jquery2.default)('#main-menu .previous');
+    var quoteBtn = (0, _jquery2.default)('#quote-btn');
+    var quoteInput = (0, _jquery2.default)('#quote-input');
+    var quoteMessage = (0, _jquery2.default)('#quote-message');
+    var aside = (0, _jquery2.default)('#article-aside');
+    var asideContent = (0, _jquery2.default)('#article-aside-content');
+
+    var articleOffset = (0, _jquery2.default)('#article-body')[0].offsetTop;
+
+    var lastScrolled = 0;
+    var currentPicRef = -1;
+
+    //Gestion du scroll sur l'article
+    article.scroll(function () {
+      var scrolled = article[0].scrollTop;
+      handleHeader(scrolled);
+      handlePicRef(scrolled, lastScrolled);
+      lastScrolled = scrolled;
+    });var fullscreenOn = false;
+    fullscreenBtn.click(function () {
+      if (!fullscreenOn) {
+        fullscreenOn = true;
+        body.addClass('fullscreen');
+      } else {
+        fullscreenOn = false;
+        body.removeClass('fullscreen');
+      }
+    });
+
+    //Gestion de l'agrandissement des images
+    pics.click(function () {
+      var pic = (0, _jquery2.default)(this);
+      if (!pic.hasClass('pic-full')) {
+        pic.addClass('pic-full');
+      } else {
+        pic.removeClass('pic-full');
+      }
+    });
+
+    //Gestion de la modification de la taille du texte des articles
+    (0, _jquery2.default)('#zoom .plus').click(function () {
+      return zoomArticle(articleBody);
+    });
+    (0, _jquery2.default)('#zoom .minus').click(function () {
+      return zoomArticle(articleBody, true);
+    });setTimeout(function () {
+      var active = summary.find('p.active');
+      if (active.length) {
+        var offset = active[0].offsetTop;
+        var height = active.outerHeight();
+        summary.stop().animate({ scrollTop: offset - height }, 1000, 'swing');
+      }
+    }, 750);
+
+    summaryNext.click(function () {
+      return scrollSummary(summary);
+    });
+    summaryPrevious.click(function () {
+      return scrollSummary(summary, true);
+    });quoteBtn.click(function () {
+      quoteInput.select();
+      var copy = void 0;
+      try {
+        copy = document.execCommand('copy');
+      } catch (e) {
+        copy = false;
+      } finally {
+        if (copy) {
+          quoteMessage.text("Citation copiée dans le presse-papier !");
+        } else {
+          quoteMessage.text("La copie automatique n'est pas prise en charge par votre navigateur. Merci de copier manuellement.");
+        }
+      }
+    });
+  }
+
+  (0, _jquery2.default)('#search .search-empty').click(function () {
+    return (0, _jquery2.default)('#search .search-input').val('');
+  });
+});
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery Scrollify
  * Version 1.0.14
@@ -11166,211 +11386,12 @@ if touchScroll is false - update index
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery_scrollify__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery_scrollify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery_scrollify__);
+__webpack_require__(1);
+(function webpackMissingModule() { throw new Error("Cannot find module \"prod\""); }());
 
-
-
-__WEBPACK_IMPORTED_MODULE_0_jquery___default()(function () {
-
-  //Gestion du scroll sur la page d'accueil
-  __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.scrollify({
-    section: ".mag",
-    touchScroll: true,
-    scrollbars: false,
-    scrollSpeed: 600,
-    easing: "linear"
-  });
-
-  //Gestion de l'animation du menu principal
-  const menuEntries = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#main-menu > ul > li > a.inactive');
-  var menuTexts = [];
-  for (let i = 0; i < menuEntries.length; i++) {
-    menuTexts[i] = menuEntries[i].textContent.trim();
-    (function (entry) {
-      setTimeout(() => collapseEntry(entry), 750);
-    })(menuEntries[i]);
-    menuEntries.eq(i).mouseover(function () {
-      __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this).find("span").width('auto');
-    });
-    menuEntries.eq(i).mouseleave(function () {
-      collapseEntry(this);
-    });
-  }
-
-  //Function qui raccourcit le texte des éléments du menu
-  function collapseEntry(entry) {
-    __WEBPACK_IMPORTED_MODULE_0_jquery___default()(entry).find("span").animate({
-      width: '0'
-    });
-  }
-
-  //Function récursive qui vide le texte des éléments du menu
-  //Non utilisée
-  function emptyEntry(entry) {
-    setTimeout(function () {
-      let nbChars = entry.textContent.trim().length;
-      if (nbChars > 2) {
-        let text = entry.textContent.trim();
-        entry.textContent = text.slice(0, 1) + text.slice(2);
-        emptyEntry(entry);
-      }
-    }, 100);
-  }
-
-  //Sections d'éléments qui ne concernent que la page article
-  const article = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#article');
-  if (article.length) {
-
-    //Gestion du header de la page article
-    let headerVisible = false;
-    const articleHeader = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#article-header-container');
-    const picRefs = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#article-body .pic-ref');
-    const pics = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#article-aside blockquote');
-    const fullscreenBtn = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.icon.resize');
-    const window = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('window');
-    const body = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('body');
-    const articleBody = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#article-body');
-    const summary = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#main-menu .summary');
-    const quoteInput = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#quote-input');
-    const quoteMessage = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#quote-message');
-    const aside = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#article-aside');
-    const asideContent = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#article-aside-content');
-
-    const articleOffset = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#article-body')[0].offsetTop;
-
-    let lastScrolled = 0;
-    let currentPicRef = -1;
-
-    //Gestion du scroll sur l'article
-    article.scroll(function () {
-      let scrolled = article[0].scrollTop;
-      handleHeader(scrolled);
-      handlePicRef(scrolled, lastScrolled);
-      lastScrolled = scrolled;
-    });
-
-    //Function qui gère le header
-    function handleHeader(scrolled) {
-      if (scrolled >= articleOffset && !headerVisible) {
-        headerVisible = true;
-        articleHeader.addClass('show');
-      } else if (scrolled < articleOffset && headerVisible) {
-        headerVisible = false;
-        articleHeader.removeClass('show');
-      }
-    }
-
-    //FUnction qui gère les références aux images
-    function handlePicRef(scrolled, lastScrolled) {
-      if (scrolled > lastScrolled && currentPicRef + 1 < picRefs.length) {
-        let nextPicRef = picRefs[currentPicRef + 1];
-        let picRefOffset = nextPicRef.offsetTop;
-        let total = scrolled + body.height() / 2;
-        if (total > picRefOffset) {
-          currentPicRef++;
-          scrollAsideToPic(nextPicRef);
-        }
-      } else if (scrolled < lastScrolled && currentPicRef - 1 >= 0) {
-        let nextPicRef = picRefs[currentPicRef - 1];
-        let picRefOffset = nextPicRef.offsetTop;
-        let total = scrolled + body.height() / 2;
-        if (total < picRefOffset) {
-          currentPicRef--;
-          scrollAsideToPic(nextPicRef);
-        }
-      }
-    }
-
-    function scrollAsideToPic(picRef) {
-      let ref = picRef.getAttribute('to');
-      let pic = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(ref);
-      let picOffset = pic[0].offsetTop;
-      asideContent.stop().animate({ scrollTop: picOffset }, 1000, 'swing');
-    }
-
-    //Gestion du mode fullscreen
-    let fullscreenOn = false;
-    fullscreenBtn.click(function () {
-      if (!fullscreenOn) {
-        fullscreenOn = true;
-        body.addClass('fullscreen');
-      } else {
-        fullscreenOn = false;
-        body.removeClass('fullscreen');
-      }
-    });
-
-    //Gestion de l'agrandissement des images
-    pics.click(function () {
-      let pic = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this);
-      if (!pic.hasClass('pic-full')) {
-        pic.addClass('pic-full');
-      } else {
-        pic.removeClass('pic-full');
-      }
-    });
-
-    //Gestion de la modification de la taille du texte des articles
-    __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#zoom .plus').click(() => zoomArticle(articleBody));
-    __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#zoom .minus').click(() => zoomArticle(articleBody, true));
-
-    //Function qui gère l'aggrandissement du texte
-    function zoomArticle(articleBody, back = false) {
-      const increment = 1,
-            mini = 12,
-            max = 24;
-      let fontSize = parseInt(articleBody.css('font-size'));
-      fontSize += back ? -increment : increment;
-      if (fontSize <= max && fontSize >= mini) articleBody.css('font-size', fontSize);
-    }
-
-    //Scrolle la section sommaire du menu principal jusqu'à la bonne entrée
-    setTimeout(function () {
-      const active = summary.find('p.active');
-      if (active.length) {
-        let offset = active[0].offsetTop;
-        let height = active.outerHeight();
-        summary.stop().animate({ scrollTop: offset - height }, 1000, 'swing');
-      }
-    }, 750);
-
-    __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#main-menu .next').click(() => scrollSummary(summary));
-    __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#main-menu .previous').click(() => scrollSummary(summary, true));
-
-    //Fonction qui scroll le sommaire du menu principal
-    function scrollSummary(summary, back = false) {
-      const scrollIncrement = 150;
-      let scroll = summary.scrollTop() || 0;
-      scroll += back ? -scrollIncrement : scrollIncrement;
-      if (scroll) summary.stop().animate({ scrollTop: scroll }, 250, 'swing');
-    }
-
-    //Gestion du bouton de copie de la citation
-    __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#quote-btn').click(function () {
-      quoteInput.select();
-      let copy;
-      try {
-        copy = document.execCommand('copy');
-      } catch (e) {
-        copy = false;
-      } finally {
-        if (copy) {
-          quoteMessage.text("Citation copiée dans le presse-papier !");
-        } else {
-          quoteMessage.text("La copie automatique n'est pas prise en charge par votre navigateur. Merci de copier manuellement.");
-        }
-      }
-    });
-  }
-});
 
 /***/ })
 /******/ ]);

@@ -28,7 +28,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <div class="boxes-container">
+  <div class="boxes-container offset-double">
     <div class="box pic-box" style="background: url(./public/img/authors/3.jpg) center center / cover no-repeat;">
     </div>
     <div class="box center name-box">

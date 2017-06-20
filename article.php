@@ -4,7 +4,12 @@
   <!-- MODIF -->
   <div id="article-header-container">
     <div id="article-header">
-      <?php require('articleIcons.php') ?>
+      <div class="icons">
+        <div class="resize-container">
+          <div class="resize-text">Mode plein écran</div>
+          <div class="icon resize"></div>
+        </div>
+      </div>
       <h2 class="article-author">Marion Laval-Jeantet</h2>
       <h3 class="article-infos">Nr 02 . 3 juin 2011</h3>
       <h1>
@@ -13,21 +18,27 @@
     </div>
   </div>
   <article id="article-content">
-    <?php require('articleIcons.php') ?>
     <h1 class="article-title">
       One by one : Brandon Ballengée’s malformed amphibian project
     </h1>
     <hr class="divider"></hr>
     <!-- MODIF -->
-    <div id="zoom" class="icons">
-      <div class="minus">-</div>
-      <span class="letters">
-        <span>A</span><span>A</span><span>A</span>
-      </span>
-      <div class="plus">+</div>
+    <div class="icons">
+      <div class="resize-container">
+        <div class="resize-text">Mode plein écran</div>
+        <div class="icon resize"></div>
+      </div>
+      <div id="zoom">
+        <div class="icon plus"></div>
+        <div class="letters">
+          <span>A</span><span>A</span><span>A</span>
+        </div>
+        <div class="icon minus"></div>
+      </div>
     </div>
     <h2 class="article-author">Marion Laval-Jeantet</h2>
     <h3 class="article-infos">Nr 02 . 3 juin 2011</h3>
+    <a href="#yo" id="download-btn">Télécharger le PDF</a>
     <div id="article-body">
       <div id="article-summary">
         <!-- MODIF -->

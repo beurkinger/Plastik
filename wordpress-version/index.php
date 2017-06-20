@@ -10,93 +10,116 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  */
- 
+
  /* Utilisé pour les recherches ici */
-  
+ 
 get_header();
 
 if(is_search()) {
 
+?>
+<div id="search">
+	<div class="content">
+		<article>
+<?php
 	global $query_string;
 
 	$query_args = explode("&", $query_string);
-	$search_query = array();
 
-	foreach($query_args as $key => $string) {
-		$query_split = explode("=", $string);
-		$search_query[$query_split[0]] = urldecode($query_split[1]);
-	} // foreach
+  echo '
+      <form action="'.site_url().'" method="get">
+        <input type="text" name="s" id="s" class="search-input" value="'.$_GET['s'].'" placeholder="Rechercher"/>
+        <button type="submit" class="search-btn"></button>
+        <div class="search-empty"></div>
+      </form>';
 
-	$search = new WP_Query($search_query);
-	$result = ($search->posts);
+	if (htmlspecialchars(urldecode(searchDisplayVar($query_string))) != "") {
 
-	$nbSearchResults = 0;
+		$search_query = array();
 	
-	echo '<div class="page-full">
-		<h1>Résultats de la recherche <i>« '.htmlspecialchars(urldecode(searchDisplayVar($query_string))).' »</i></h1>
-		<div class="resultat-search">
-	';
+		foreach($query_args as $key => $string) {
+			$query_split = explode("=", $string);
+			$search_query[$query_split[0]] = urldecode($query_split[1]);
+		} // foreach
 	
-
-	foreach($result as $post) {
-		$numero = get_post_meta( get_the_ID(), 'numero', true );
-		$type = $post->post_type;
-		$post_tags = get_the_tags();
-		$url = "";
-
-		/* Créer le lien en fonction du type */
-		switch($type) {
-			case 'expo':
-				$genre = 'Expositions';
+		$search = new WP_Query($search_query);
+		$result = ($search->posts);
+	
+		$nbSearchResults = 0;
+	
+	
+		echo '<h2 class="search-content">
+			Résultats de la recherche avec le terme <br>
+			<span>&laquo; '.htmlspecialchars(urldecode(searchDisplayVar($query_string))).'&raquo;</span>
+		  </h2>';
+	
+		foreach($result as $post) {
+			$type = $post->post_type;
+			$post_tags = get_the_tags();
+			$url = "";
+	
+			/* Créer le lien en fonction du type */
+			if ($post->post_type == 'post') {
 				$titre = get_the_title();
-				$num = $post_tags[0]->name;
-				$str = preg_replace(array('#<p>#','#</p>#','#<h1>#','#</h1>#','#<h2>#','#</h2>#'), array('','','<b>','</b>','<b>','</b>'), apply_filters('the_content', $post->post_content));
+				$txt = preg_replace(array('/<!--nextpage-->/','/<!--more-->/','/<strong>/','/<\/strong>/','/{|<h1>|<h2>|<h3>|<h4>/'), '',tronquerTxt(apply_filters('the_content', $post->post_content), 260));
 				$url = get_permalink();
-				break;
-			case 'lieu':
-				$genre = 'Lieux';
-				$titre = get_the_title();
-				$num = $post_tags[0]->name;
-				$str = preg_replace(array('#<p>#','#</p>#','#<h1>#','#</h1>#','#<h2>#','#</h2>#'), array('','','<b>','</b>','<b>','</b>'), apply_filters('the_content', $post->post_content));
-				$str = preg_replace(array('#<p>#','#</p>#','#<h1>#','#</h1>#','#<h2>#','#</h2>#'), array('','','<b>','</b>','<b>','</b>'), apply_filters('the_content', $post->post_content));
-				$url = get_permalink();
-				break;
-			case 'artiste':
-				$genre = 'Artistes';
-				$titre = str_replace("/", " ", esc_attr(get_the_title()));
-				$num = $post->name;
-				$str = preg_replace(array('#<p>#','#</p>#','#<h1>#','#</h1>#','#<h2>#','#</h2>#'), array('','','<b>','</b>','<b>','</b>'), apply_filters('the_content', $post->post_content));
-				$url = get_permalink();
-				break;
+				$date = get_the_date();
+				
+			  foreach ($post_tags as $tag) {
+				  if ($tag->name > 0) {
+					  $num = $tag->name;
+				  } else {
+					  if(!isset($auteur)) {
+						  $auteur = $tag->name;
+					  } else {
+						  $auteur = $auteur.' et '.$tag->name;
+					  }
+				  }
+			  }
+				
+			}
+	
+	
+	
+			if ($url != "") {
+			$nbSearchResults++;
+			echo '<a class="result num-'.$num.'" href="'.$url.'">
+			<h3 class="result-title">
+			  <em>'.$titre.',</em>
+			  '.$auteur.',
+			  <strong>Plastik Nr '.$num.'</strong>
+			</h3>
+			<div class="result-content">
+			  '.$txt.'
+			</div>
+			<p class="result-date">
+			  '.$date.'
+			</p>
+		  </a>';
+			}
+			
 		}
+			
+		// Afficher le résultat des recherches s'il y a au moins 1 résultat sinon afficher un message d'alerte
+		if ($nbSearchResults == 0) {
+			echo '<h1>Aucun résultat trouvé pour votre recherche</h1>';
+		}
+	}
 
-		if ($url != "") {
-		$nbSearchResults++;
-		echo '<article>
-				<h2>'.$genre.' <strong>'.$num.'</strong> <em>'.$titre.'</em></h2>
-				<div class="resultat-info">
-					<p class="resultat-txt">'.tronquerTxt($str, 475).'</p>
-					<p class="resultat-link"><a href="'.$url.'">En savoir +</a></p>
-				</div>
-			</article>';
-		}
-		
-	}
-		
-	// Afficher le résultat des recherches s'il y a au moins 1 résultat sinon afficher un message d'alerte
-	if ($nbSearchResults == 0) {
-		echo '<div class="cadreRechercheEmpty"><h1>Aucun résultat trouvé pour votre recherche</h1></div>';
-	}
-echo '</div>
-	</div>';
+echo '</article>
+  </div>
+</div>';
+
 } elseif (have_posts()) {
 
 add_action( 'wp_enqueue_scripts', 'loadIndexPostCss' );
+
 ?>
 	<div class="left" id="columnLeft">
 		<h2 class="lTitle"><?php echo $post->post_title; ?></h2>
 		<div class="lpContent"><?php echo $post->post_content; ?></div>
 	</div>
+    
 <?php
 }
 

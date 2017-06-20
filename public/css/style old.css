@@ -1,0 +1,1080 @@
+@font-face {
+    font-family: 'WarnockPro';
+    src: url('fonts/WarnockPro-Disp.otf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'WarnockPro';
+    src: url('fonts/WarnockPro-BoldDisp.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'WarnockPro';
+    src: url('fonts/WarnockPro-LightDisp.otf');
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: 'WarnockPro';
+    src: url('fonts/WarnockPro-It.otf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+* {
+  border: 0; margin: 0; padding: 0; background-color: transparent;
+}
+
+html, body {
+  height: 100%; width: 100%;
+}
+
+html {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;-
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #000;
+  font: normal 15px 'WarnockPro', serif;
+  color: #FFF;
+  letter-spacing: 1px;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6,
+article {
+  display: block;
+}
+
+p {
+  margin: 20px 0;
+  line-height: 150%;
+}
+
+a {
+  color: #FFF;
+}
+
+.clearfix {
+  clear:both;
+}
+
+#main-menu {
+  z-index: 30;
+  box-sizing: border-box;
+  position: fixed; top: 0; left: 0;
+  display: block;
+  /*padding-right: 32px;*/
+  width: 222px; height: 100%;
+  line-height: 100%;
+  color: white;
+  overflow-x: hidden;
+  transition: width 350ms;
+}
+
+#main-menu h1 {
+  box-sizing: border-box;
+  margin: 32px 0;
+  width: 190px; height: 52px;
+  padding: 0 32px;
+  font: normal 46px 'WarnockPro';
+  line-height: 100%;
+  border-bottom: 1px solid #FFF;
+  letter-spacing: 2px;
+}
+
+#main-menu h1 a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #FFF;
+}
+
+#main-menu ul {
+  display: block;
+  list-style: none;
+}
+
+#main-menu li {
+  display: block;
+  padding: 0 0 0 32px;
+  margin-bottom: 21px;
+  font: bold 15px 'WarnockPro';
+  letter-spacing: 2px;
+}
+
+#main-menu li:after {
+  display: block; width: 0; height: 0; content: " ";
+  clear: both;
+}
+
+#main-menu li a {
+  text-decoration: none;
+}
+
+#main-menu li a span {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+#main-menu.article {
+  width: 400px;
+  background: #000;
+}
+
+body.fullscreen #main-menu  {
+  background: #FFF;
+  width: 190px;
+}
+
+body.fullscreen #main-menu h1 a  {
+  color: #000;
+}
+
+body.fullscreen #main-menu ul  {
+  display: none;
+}
+
+
+#main-menu.article ul {
+  width: 100px;
+}
+
+#main-menu.article ul li {
+  text-align:right;
+  padding: 0;
+}
+
+#main-menu .numbers-browser {
+  margin-top: 12px;
+  position: relative;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+#main-menu .numbers-list {
+  float: right;
+  border-top: 1px solid #FFF;
+  width: 24px;
+}
+
+#main-menu .numbers-list .number {
+  display: block;
+  box-sizing: border-box;
+  padding: 4px 0 0 2px;
+  text-align: center;
+  width: 24px; height: 24px;
+  border: 1px solid #FFF;
+  border-top: 0;
+  text-decoration: none;
+}
+
+#main-menu .numbers-list .number:hover,
+#main-menu .numbers-list .number.active  {
+  background: #FFF;
+  color: #000;
+}
+
+#main-menu .number-content {
+  position: absolute;
+  top: -36px;
+  left: 100%;
+  width: 280px;
+  padding: 12px 0 12px 20px;
+  overflow-x: hidden;
+}
+
+#main-menu .number-content .summary {
+  width: 100%;
+  text-align: left;
+  max-height: 52vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 10px 40px 10px 0;
+}
+
+#main-menu .number-content .previous,
+#main-menu .number-content .next {
+  display: block;
+  position: absolute;
+  left:0;
+  width: 100%; height: 10px;
+  content: " ";
+  box-shadow: 0 0 40px 20px #000;
+  background: url('./img/arrow-bottom-white.svg') center center / auto 100% no-repeat;
+}
+
+#main-menu .number-content .previous:hover,
+#main-menu .number-content .next:hover {
+  cursor: pointer;
+}
+
+#main-menu .number-content .previous {
+  top:0;
+  transform: rotate(180deg);
+}
+
+#main-menu .number-content .next {
+  bottom:0;
+}
+
+#main-menu .number-content h3 {
+  font: bold 16px 'WarnockPro';
+  color: #808080;
+  letter-spacing: 2px;
+  margin: 18px 0 8px 0;
+  padding-right: 32Px;
+}
+
+#main-menu .number-content p {
+  font: normal 15px 'WarnockPro';
+  padding-bottom: 4px;
+  margin: 0 0 18px 0;
+  padding-right: 32Px;
+}
+
+#main-menu .number-content p span {
+  display: block;
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+#main-menu .number-content p.active {
+  border-bottom: 1px solid #FFF;
+}
+
+#main-menu .number-content a {
+  display: block;
+  font-style: italic;
+  text-decoration: none;
+}
+
+#main-menu .number-content a:hover {
+  text-decoration: underline;
+}
+
+#main-menu-footer {
+  box-sizing: border-box;
+  width: 190px;
+  font-size: 12px;
+  position: absolute; bottom: 24px; left: 0;
+  padding-left: 32Px;
+  width: 190px;
+}
+
+#main-menu-footer a {
+  text-decoration: none;
+}
+
+#main-menu-footer a:hover {
+  font-weight: bold;
+}
+
+#main-menu-footer a:first-child {
+  margin-right: 10px;
+}
+
+#main-container {
+  display: block;
+  height: 100%;
+  min-width: 1000px;
+}
+
+.mag {
+  width: 100%; height: 100%;
+}
+
+.mag-content,
+#authors,
+#magazines,
+#about,
+#contribute,
+#contact,
+#credits,
+#author,
+#article,
+#legals,
+#error,
+#search {
+  box-sizing: border-box;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 84px 0 0 272px;
+  /*padding: 84px 19% 0 400px;*/
+  overflow-y: scroll;
+}
+
+.boxes-container {
+  overflow: visible;
+  width:auto; height:auto;
+  float: left;
+}
+
+.boxes-container::after {
+  display: block; height: 0; width: 0;
+  content: " ";
+  clear: both;
+}
+
+.boxes-container.offset {
+  margin-left: 167px;
+}
+
+.boxes-container .box {
+  box-sizing: border-box;
+  border: 1px solid #FFF;
+  width: 168px;
+  min-height: 168px; height: 168px;
+  padding: 20px;
+  transition: background 0.2s, color 0.2s;
+  margin-left: -1px;
+  margin-top: -1px;
+  float: left;
+}
+
+.boxes-container:first-child .box {
+  margin-top: 0;
+}
+
+.boxes-container .box:first-child {
+  margin-left: 0;
+}
+
+.boxes-container.inverse .box {
+  float: right;
+}
+
+.boxes-container.inverse .box:first-child {
+  margin-left: -1px;
+}
+
+.boxes-container.inverse .box:last-child {
+  margin-left: 0;
+}
+
+.boxes-container .box.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boxes-container .box.offset {
+  margin-left: 167px;
+}
+
+.boxes-container:hover .number-box,
+.boxes-container:hover .infos-box,
+.boxes-container:hover .name-box {
+  color: #000;
+  background: #FFF;
+}
+
+.boxes-container .number-box {
+  padding: 40px;
+}
+
+.boxes-container .number-box h4 {
+  height: 15px;
+  font: normal 20px 'WarnockPro';
+  line-height: 100%;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.boxes-container .number-box h2 {
+  height: 60px;
+  font: normal 90px 'WarnockPro';
+  line-height: 100%;
+  letter-spacing: 0px;
+}
+
+.boxes-container .infos-box h3 {
+  font: normal 16px 'WarnockPro';
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.boxes-container .infos-box h3::first-line {
+  font-weight: bold;
+}
+
+.boxes-container .letter-box h2 {
+  padding-top: 15px;
+  font: normal 90px 'WarnockPro';
+  line-height: 100%;
+}
+
+.boxes-container .name-box h3 {
+  font: normal 16px 'WarnockPro';
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.mag-boxes {
+  width: 0; height: 0;
+}
+
+.mag-boxes .box:last-child {
+  margin-top: -1px;
+}
+
+#about article,
+#contribute article,
+#contact article,
+#credits article,
+#legals article,
+#error article {
+  max-width: 750px;
+  margin: 0 14%;
+}
+
+#about h1,
+#contribute h1,
+#contact h1,
+#credits h1,
+#legals h1,
+#error h1 {
+  font-size: 32px ;
+  letter-spacing: 2px;
+  line-height: 100%;
+  margin: 15px 0 30px 0;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #FFF;
+}
+
+#about .space-top,
+#contribute .space-top,
+#contact .space-top,
+#credits .space-top,
+#legals .space-top,
+#error .space-top {
+  margin-top: 40px;
+}
+
+#contact ul,
+#credits ul {
+  margin: 20px 0;
+  list-style: none;
+}
+
+#contact li,
+#credits li {
+  padding-bottom: 14px;
+}
+
+#about .logo {
+  height: 80px;
+  width: auto;
+  margin: 30px 20px 30px 0;
+}
+
+#author,
+#search {
+  position: relative;
+  padding: 0 272px 0 222px;
+}
+
+#author .content,
+#search .content {
+  box-sizing: border-box;
+  background: #FFF;
+  min-height: 100%;
+  color: #000;
+  padding: 0 14% 84px 14%;
+}
+
+#author .content article,
+#search .content article {
+  max-width: 750px;
+}
+
+#author .back {
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 40px 0 24px 0;
+  height: 20px;
+  text-decoration: none;
+  font: normal 16px 'WarnockPro';
+  color: #C6C6C6;
+  padding: 2px 0 0 24px;
+  background: url('./img/arrow-left-gray.svg') left top / auto 100% no-repeat;
+}
+
+#author .back:hover {
+  text-decoration: underline;
+}
+
+
+#author article .author-name,
+#search .content .search-input {
+  margin: 16px 0 0 0;
+  font: bold 28px 'WarnockPro';
+  line-height: 100%;
+}
+
+#author article .author-title,
+#search article .search-content {
+  margin: 14px 0 30px 0;
+  font: normal 20px 'WarnockPro';
+  line-height: 100%;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #000;
+}
+
+#author aside {
+  position: absolute; top: 0; right: 0;
+  box-sizing: border-box;
+  padding: 162px 0 30px 0;
+  width: 272px;
+  background: #000;
+}
+
+#author aside h2 {
+  position:relative;
+  box-sizing: border-box;
+  font: bold 20px 'WarnockPro';
+  line-height: 100%;
+  padding: 0 30px 12px 30px;
+  border-bottom: 1px solid #FFF;
+}
+
+#author aside p {
+  margin: 30px 30px 60px 30px;
+  word-wrap: break-word;
+}
+
+#article,
+#article-header-container {
+  padding: 0 19% 0 400px;
+  background: #FFF;
+}
+
+#article {
+  position: relative;
+  transition: padding 350ms;
+}
+
+#article .icons {
+  position: relative;
+  float: right;
+  right: -14%;
+}
+
+#article .icons::after {
+  display: block; width: 0; height: 0; content: " "; clear: both;
+}
+
+#article .icons .icon {
+  float: right;
+  position: relative;
+  width: 18px; height: 18px;
+  margin-left: 15Px;
+}
+
+#article .icons .icon:hover {
+  cursor: pointer;
+}
+
+#article .icons .icon span {
+  display: none;
+  position: absolute;
+  background: #000;
+  color: #FFF;
+  bottom: 100%;
+  right: -10px;
+  z-index: 150;
+  text-align: center;
+  width: 176px; height: 23px;
+  padding-top: 7px;
+  /*letter-spacing: 1.5px;*/
+  font-weight: bold;
+  bottom: calc(100% + 10px);
+}
+
+#article .icons .icon span::after {
+  display: block;
+  position: absolute;
+  top: 100%;
+  right: 13.5px;
+  content: " ";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: #000 transparent transparent transparent;
+}
+
+#article .icons .icon:hover span {
+  display: block;
+}
+
+#article .icons .download {
+  background: url('./img/download.svg') center bottom / 100% auto no-repeat;
+}
+
+#article .icons .download:hover {
+  background: url('./img/download-hover.svg') center bottom / 100% auto no-repeat;
+}
+
+#article .icons .resize {
+  background: url('./img/maximize.svg') center bottom / 100% auto no-repeat;
+}
+
+#article .icons .resize:hover {
+  background: url('./img/maximize-hover.svg') center bottom / 100% auto no-repeat;
+}
+
+body.fullscreen #article .icons .resize {
+  background: url('./img/minimize.svg') center bottom / 100% auto no-repeat;
+}
+
+body.fullscreen #article .icons .resize:hover {
+  background: url('./img/minimize-hover.svg') center bottom / 100% auto no-repeat;
+}
+
+#article .icons .minus,
+#article .icons .plus {
+  font-size: 26px;
+  font-weight: bold;
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  overflow: hidden;
+  text-align: center;
+  color: #C6C6C6;
+}
+
+#article .icons .minus:hover,
+#article .icons .plus:hover {
+  cursor: pointer;
+  color: #000;
+}
+
+#article .icons .letters {
+  font-size: 12px;
+}
+
+#article .icons .letters span:nth-child(2) {
+  font-size: 16px;
+}
+
+#article .icons .letters span:nth-child(3) {
+  font-size: 24px;
+}
+
+body.fullscreen #article,
+body.fullscreen #article-header-container {
+  padding: 0 30% 0 190px;
+}
+
+#article-header-container {
+  z-index: 15;
+  position: fixed; top:-84px; left: 0;
+  box-sizing: border-box;
+  width: 100%; height: 84px;
+  min-width: 1000px;
+  transition: top 150ms, padding 350ms;
+}
+
+#article-header-container.show {
+  top: 0;
+  transition: top 500ms, padding 350ms;
+  box-shadow: 0px 0px 60px 50px rgba(255, 255, 255 , 1);
+}
+
+#article-header {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%; height: 100%;
+  background: #FFF;
+  border-bottom: 1px solid #000;
+  color: #000;
+  padding: 18px 110px 0 14%;
+}
+
+#article-header .icons {
+  position: absolute;
+  bottom: 18px; right: 20px;
+}
+
+#article-header .article-author {
+  font: normal 15px 'WarnockPro';
+  margin-right: 10px;
+  display: inline-block;
+}
+
+#article-header .article-infos {
+  font: normal 15px 'WarnockPro';
+  color: #999;
+  display: inline-block;
+}
+
+
+#article-header h1 {
+  position: absolute; left:14%; bottom: 12px;
+  font: bold 24px 'WarnockPro';
+  line-height: 120%;
+  margin-right: 110px;
+  max-height: 54px;
+  overflow: hidden;
+  background: #FFF;
+}
+
+#article-content {
+  position: relative;
+  background: #FFF;
+  min-height: 100%;
+  color: #000;
+  padding: 30px 14% 40vh 14%;
+  overflow-x: hidden;
+}
+
+#article-content .icons-top:first-of-type {
+  margin-top: 21px;
+}
+
+#article-content .article-title {
+  font: bold 52px 'WarnockPro';
+  display: inline;
+  line-height: 110%;
+}
+
+#article-content .article-author {
+  font: normal 22px 'WarnockPro';
+  margin: 0 20px 10px 0;
+  display: inline-block;
+}
+
+#article-content .article-infos {
+  font: normal 16px 'WarnockPro';
+  color: #999;
+  display: inline-block;
+}
+
+#article-content .divider {
+  display: block; width: 200%; height: 0;
+  margin: 10px 0 20px 0;
+  border-bottom: 1px solid #000;
+}
+
+#article-body {
+  padding-top: 40px;
+  font-size: 15px;
+  max-width: 750px;
+}
+
+#article-body h1 {
+  position: relative;
+  display: inline-block;
+  /*left: -55px;*/
+  /*padding: 8px 55px;*/
+  /*padding: 8px 0;*/
+  /*border-bottom: 1px solid #000;*/
+  margin: 60px 0 30px 0;
+  font: bold 1.74em 'WarnockPro';
+  letter-spacing: 1px;
+}
+
+#article-body h1::after {
+  position: absolute;
+  display: block;
+  width: 1000px; height: 8px;
+  content: " ";
+  right: 0;
+  border-bottom: 1px solid #000;
+  /*width*/
+}
+
+#article-body h1.title-light {
+  font-weight: normal;
+}
+
+#article-body p {
+  font-size: 1em;
+}
+
+#article-body a {
+  color: #000;
+  text-decoration: underline;
+}
+
+#article-body .pic-ref,
+#article-body .note-ref
+{
+  font-size: 0.8em;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#quote {
+  /*max-width: 750px;*/
+}
+
+#quote-btn {
+  border: 1px solid #000;
+  display: inline-block;
+  padding: 10px 12px 8px 12px;
+  float: left;
+  margin-right: 20px;
+}
+
+#quote-btn:hover {
+  cursor: pointer;
+  background: #000;
+  color: #FFF;
+}
+
+#quote-message {
+  height: 38px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#quote-input {
+  /*visibility: hidden;*/
+  color: #FFF;
+  border: 0;
+  width: 1px; height: 1px;
+  outline: #FFF;
+  clear:both;
+}
+
+#article-summary ul {
+  list-style: none;
+}
+
+#article-summary li {
+  margin: 10px 0;
+  font: normal 1.2em 'WarnockPro';
+}
+
+#article-summary li a {
+  color: #000;
+  text-decoration: none;
+}
+
+#article-summary li a:hover {
+  font-weight: bold;
+}
+
+
+#article-aside {
+  z-index: 50;
+  position: fixed; top: 0; right: 0;
+  box-sizing: border-box;
+  width: 19%;
+  background: #FFF;
+  height: 100%;
+  color: #000;
+  overflow-x: hidden;
+  box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.20);
+  transition: width 350ms;
+}
+
+body.fullscreen #article-aside {
+  width: 30%;
+}
+
+#article-aside-content {
+  width: 100%; height: 100%;
+  /*padding-top: 320px;*/
+  padding-bottom: 50vh;
+  padding-right: 40px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#article-aside-content p {
+  margin: 14px 24px 24px 0;
+  padding: 0 0 14px 14px;
+  border-bottom: 1px solid #000;
+  font: normal 14px 'WarnockPro';
+}
+
+#article-aside-content .pic:first-of-type {
+  margin-top: 320px;
+}
+
+#article-aside-content .pic {
+  display: block;
+}
+
+#article-aside-content .pic p:first-child {
+  margin:0; padding:0; border: 0; width: auto; height: auto; line-height: 0;
+}
+
+#article-aside-content .pic p:last-child {
+  margin-bottom: 94px;
+}
+
+#article-aside-content .pic.pic-full {
+  z-index: 100;
+  position: fixed;
+  box-sizing: border-box;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #FFF;
+  text-align: center;
+  margin: 0;
+}
+
+#article-aside-content .pic.pic-full blockquote {
+  box-sizing: border-box;
+  width: 100%; height: 100%;
+  overflow-y: auto;
+  padding: 3vh 25%;
+}
+
+#article-aside-content .pic:hover {
+  cursor: pointer;
+}
+
+#article-aside-content img {
+  width: 100%; height: auto;
+}
+
+#article-aside-content .pic.pic-full img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+#article-aside-content .pic.pic-full p {
+  margin: 4vh 0 0 0;
+  padding: 0;
+  border: 0;
+  font-size: 16px;
+}
+
+#search .content {
+  padding-top: 84px;
+}
+
+#search form {
+  margin-bottom: 100px;
+}
+
+#search .content .search-input {
+  padding: 5px 0;
+  border-bottom: 1px solid black;
+  width: 70%; height: 35px;
+  max-width: 400px;
+  vertical-align: bottom;
+}
+
+#search .content .search-input::placeholder {
+  color: #BBB;
+}
+
+#search .content .search-btn {
+  display: inline-block;
+  margin-left: 25px;
+  width: 36px; height: 36px;
+  background: url('./img/search-btn.svg') center center / 100% auto no-repeat;
+  vertical-align: bottom;
+}
+
+#search .content .search-empty {
+  display: inline-block;
+  margin-left: 20px;
+  width: 18px; height: 36px;
+  background: url('./img/search-empty.svg') center center / 100% auto no-repeat;
+  vertical-align: bottom;
+}
+
+#search .content .search-content {
+  border-bottom: 0;
+}
+
+#search .content .result {
+  display: block;
+  margin-bottom: 34px;
+  text-decoration: none;
+  font-weight: normal;
+  color: #000;
+}
+
+#search .content .result:hover {
+cursor: pointer;
+}
+
+#search .content .result-title {
+  font: normal 18px 'WarnockPro';
+  margin: 0;
+}
+
+#search .content .result p {
+  margin: 14px 0;
+}
+
+#search .content .result:hover .result-content {
+  text-decoration: underline;
+}
+
+#search .content .result-date {
+  margin: 14px 0;
+  font-size: 14px;
+  color: #808080;
+}
+
+@media screen and (min-width: 1280px) {
+  .mag-content,
+  #magazines,
+  #authors {
+    padding-left: 25%;
+  }
+
+  body,
+  #article-body {
+    font-size: 16px;
+  }
+
+  #author,
+  #search {
+    padding-right: 350px;
+  }
+
+  #author aside,
+  #search aside {
+    width: 350px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+
+  .mag-content,
+  #magazines,
+  #authors {
+    padding-left: 33%;
+  }
+
+  body {
+    font-size: 17px;
+  }
+  #article-body {
+    font-size: 18px;
+  }
+
+  body.fullscreen #article,
+  body.fullscreen #article-header-container {
+    padding: 0 25% 0 190px;
+  }
+
+  body.fullscreen #article-aside {
+    width: 25%;
+  }
+
+  #author,
+  #search {
+    padding-right: 450px;
+  }
+
+  #author aside,
+  #search aside {
+    width: 450px;
+  }
+}

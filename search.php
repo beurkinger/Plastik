@@ -8,7 +8,7 @@
         <div class="search-empty"></div>
       </form>
       <h2 class="search-content">
-        Résultats de la recherche avec le terme "animaux"
+        Résultats de la recherche pour <em>"animaux"</em>
       </h2>
       <a class="result">
         <h3 class="result-title">
