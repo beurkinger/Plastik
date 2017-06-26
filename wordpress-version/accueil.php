@@ -10,10 +10,12 @@ $listREVUES = listREVUES('reverse');
 get_header();
 
 ?>
-
-</head>
-<body>
-
+<div id="website-intro">
+  <div>
+    Bienvenue sur Plastik,<br/>
+    <em>la revue d'art & science</em>
+  </div>
+</div>
 <?php
 // Liste les numéros disponibles dans le menu
 foreach ($listREVUES as $key => $revue) {

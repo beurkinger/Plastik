@@ -1,4 +1,10 @@
 <?php require('header.php') ?>
+<div id="website-intro">
+  <div>
+    Bienvenue sur Plastik,<br/>
+    <em>la revue d'art & science</em>
+  </div>
+</div>
 <div class="mag" style="background: url(./public/img/covers/1.jpg) center center / cover no-repeat fixed;">
   <div class="mag-content">
     <div class="boxes-container mag-boxes" style="margin-left: 90px; margin-top: 0;">
@@ -51,4 +57,7 @@
     </div>
   </div>
 </div>
-<?php require('footer.php') ?>
+<?php
+  $page = 'home';
+  require('footer.php');
+?>

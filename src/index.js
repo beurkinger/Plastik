@@ -3,6 +3,17 @@ import scrollify from "jquery-scrollify";
 
 $(function() {
 
+  //Gestion de l'animation de la page d'accueil
+  $("#website-intro").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+  function () {
+    $(this).remove();
+  });
+
+  $("#website-intro").on("click",
+  function () {
+    $(this).remove();
+  });
+
   //Gestion du scroll sur la page d'accueil
   $.scrollify({
     section : ".mag",

@@ -1,5 +1,9 @@
 <?php
-if (is_singular('post')) $page = 'article';
+if (is_singular('post')) {
+  $page = 'article';
+} elseif (is_page('accueil')) {
+  $page = 'home';
+}
 ?>
 
 <nav id="main-menu" class="<?php echo $page; ?>">
