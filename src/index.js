@@ -1,27 +1,54 @@
 import $ from "jquery";
 import scrollify from "jquery-scrollify";
 
+const scrollSpeed = 600;
+
 $(function() {
-
-  //Gestion de l'animation de la page d'accueil
-  $("#website-intro").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-  function () {
-    $(this).remove();
-  });
-
-  $("#website-intro").on("click",
-  function () {
-    $(this).remove();
-  });
 
   //Gestion du scroll sur la page d'accueil
   $.scrollify({
     section : ".mag",
     touchScroll : true,
     scrollbars : false,
-    scrollSpeed: 600,
+    scrollSpeed: scrollSpeed,
     easing: "linear"
   });
+
+  //Gestion de l'animation de la page d'accueil
+  const websiteIntro = $('#website-intro');
+  if (websiteIntro.length) {
+    let innerDiv = websiteIntro.find('div');
+    // $.scrollify.instantMove(0);
+    // $.scrollify.disable();
+    // innerDiv.animate({opacity : 1}, 3500, null, function () {
+    //   $.scrollify.enable();
+    //   $.scrollify.move(1);
+    //   setTimeout(() => {
+    //     websiteIntro.remove();
+    //   }, scrollSpeed * 1.5);
+    // });
+
+    setTimeout(() => {
+      websiteIntro.animate({opacity : 0}, 1000, null, function () {
+        websiteIntro.remove();
+      });
+    }, 3000);
+
+    innerDiv.animate({opacity : 1}, 1000, null, function () {
+      innerDiv.animate({opacity : 0}, 2500);
+    });
+
+    websiteIntro.on("click", function () {
+      websiteIntro.remove();
+    });
+
+    // $("#website-intro").on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+    // function () {
+    //   $(this).remove();
+    // });
+    //
+
+  }
 
   //Gestion de l'animation du menu principal
   const menuEntries = $('#main-menu > ul > li > a.inactive');
@@ -55,7 +82,7 @@ $(function() {
     const articleHeader = $('#article-header-container');
     const picRefs = $('#article-body .pic-ref');
     const pics = $('#article-aside .pic');
-    const fullscreenBtn = $('.icon.resize');
+    const fullscreenBtn = $('.resize-container');
     const body = $('body');
     const articleBody = $('#article-body');
     const summary = $('#main-menu .summary');
@@ -66,6 +93,7 @@ $(function() {
     const quoteMessage = $('#quote-message');
     const aside = $('#article-aside');
     const asideContent = $('#article-aside-content');
+    const backToTop = $('#back-to-top');
 
     const articleOffset = $('#article-body')[0].offsetTop;
 
@@ -78,6 +106,12 @@ $(function() {
       handleHeader(scrolled);
       handlePicRef(scrolled, lastScrolled);
       lastScrolled = scrolled;
+    });
+
+    //Gestion du retour en haut de page
+    backToTop.on('click', function () {
+      article[0].scrollTop = 0;
+      resetAsideScroll();
     });
 
     //Function qui gère le header
@@ -119,17 +153,33 @@ $(function() {
       asideContent.stop().animate({scrollTop : picOffset }, 1000, 'swing');
     }
 
+    function resetAsideScroll () {
+      currentPicRef = -1;
+      asideContent.stop().animate({scrollTop : 0 }, 1000, 'swing');
+    }
+
     //Gestion du mode fullscreen
     let fullscreenOn = false;
     fullscreenBtn.click(function () {
-      if (!fullscreenOn) {
-        fullscreenOn = true;
-        body.addClass('fullscreen');
-      } else {
-        fullscreenOn = false;
-        body.removeClass('fullscreen');
+      toggleFullscreen();
+    });
+
+    $(document).on('keyup', function (e) {
+      e = e || window.event;
+      if (fullscreenOn && (e.keyCode == 27 || e.keyCode == 70)
+        || !fullscreenOn && e.keyCode == 70) {
+        toggleFullscreen();
       }
     });
+
+    function toggleFullscreen () {
+      if (!fullscreenOn) {
+        body.addClass('fullscreen');
+      } else {
+        body.removeClass('fullscreen');
+      }
+      fullscreenOn = !fullscreenOn;
+    };
 
     //Gestion de l'agrandissement des images
     pics.click(function () {

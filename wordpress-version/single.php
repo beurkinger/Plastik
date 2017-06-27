@@ -83,14 +83,9 @@ $listARTICLES = listARTICLES();
 
 echo '<div id="article">
   <div id="article-header-container">
-    <div id="article-header">
-			<div class="icons">
-				<div class="resize-container">
-					<div class="resize-text">Mode plein écran</div>
-					<div class="icon resize"></div>
-				</div>
-			</div>
-		  <h2 class="article-author">'.$tagAuteur.'</h2>
+    <div id="article-header">';
+			include('articleIcons.php');
+			echo '<h2 class="article-author">'.$tagAuteur.'</h2>
       <h3 class="article-infos">Nr '.$tagRevue.' . '.get_the_date('j F Y')/*$listREVUES[$tagRevue]['date_full']*/.'</h3>
       <h1>
         '.esc_attr(get_the_title()).'
@@ -101,21 +96,9 @@ echo '<div id="article">
   	echo '<h1 class="article-title">
       '.esc_attr(get_the_title()).'
     </h1>
-    <hr class="divider"></hr>
-		<div class="icons">
-      <div class="resize-container">
-        <div class="resize-text">Mode plein écran</div>
-        <div class="icon resize"></div>
-      </div>
-      <div id="zoom">
-        <div class="icon plus"></div>
-        <div class="letters">
-          <span>A</span><span>A</span><span>A</span>
-        </div>
-        <div class="icon minus"></div>
-      </div>
-    </div>
-    <h2 class="article-author">'.$tagAuteur.'</h2>
+    <hr class="divider"></hr>';
+		include('articleIcons.php');
+    echo'<h2 class="article-author">'.$tagAuteur.'</h2>
     <h3 class="article-infos">Nr '.$tagRevue.' . '.get_the_date('j F Y')/*$listREVUES[$tagRevue]['date_full']*/.'</h3>';
 		if (isset($pdf) && trim($pdf) != "") {
 	    echo '<a href="'.$pdf.'" id="download-btn">Télécharger le PDF</a>';
@@ -155,6 +138,10 @@ echo '<div id="article">
 			<input id="quote-input" type="text" value="'.$quote.'" />
 		</div>
 		</div>
+		<div id="back-to-top-container">
+      <div id="back-to-top">
+      </div>
+    </div>
   </article>
   <aside id="article-aside">
 		<div id="article-aside-content">';

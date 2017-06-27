@@ -6,8 +6,15 @@
     <div id="article-header">
       <div class="icons">
         <div class="resize-container">
-          <div class="resize-text">Mode plein écran</div>
+          <div class="resize-text">Plein écran</div>
           <div class="icon resize"></div>
+        </div>
+        <div id="zoom">
+          <div class="icon plus"></div>
+          <div class="letters">
+            <span>A</span><span>A</span><span>A</span>
+          </div>
+          <div class="icon minus"></div>
         </div>
       </div>
       <h2 class="article-author">Marion Laval-Jeantet</h2>
@@ -25,7 +32,7 @@
     <!-- MODIF -->
     <div class="icons">
       <div class="resize-container">
-        <div class="resize-text">Mode plein écran</div>
+        <div class="resize-text">Plein écran</div>
         <div class="icon resize"></div>
       </div>
       <div id="zoom">
@@ -85,6 +92,10 @@
         <input id="quote-input" type="text" value="Dominique Peysson, « Le nanomonde : une nouvelle « hétérotopie » ? », [Plastik] : Nano #03 [en ligne], Mis en ligne le 11 février 2013, consulté le 08 juin 2017. URL : http://plastik.local.quiros.fr/le-nanomonde-une-nouvelle-heterotopie/ ISSN 2101-0323" />
       </div>
     </div>
+    <div id="back-to-top-container">
+      <div id="back-to-top">
+      </div>
+    </div>
   </article>
   <aside id="article-aside">
     <div id="article-aside-content">
@@ -94,7 +105,7 @@
           <strong>AOo</strong>, <em>Le leurre de Centaure</em>, 2011 (performance)
         </p>
       </div> -->
-      <div class="pic" id="img1">
+      <div class="pic" id="img-1">
         <blockquote>
           <p class="texte">
             <img src="./public/img/articles/1.png" />

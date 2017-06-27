@@ -1,6 +1,13 @@
-<div class="icons icons-top">
-  <?php if (isset($pdf) && $pdf != "") {
-    echo '<a class="icon download" href="'.$pdf.'"><span>Télécharger le PDF</span></a>';
-  } ?>
-  <div class="icon resize"><span>Passer en plein écran</span></div>
+<div class="icons">
+  <div class="resize-container">
+    <div class="resize-text">Plein écran</div>
+    <div class="icon resize"></div>
+  </div>
+  <div id="zoom">
+    <div class="icon plus"></div>
+    <div class="letters">
+      <span>A</span><span>A</span><span>A</span>
+    </div>
+    <div class="icon minus"></div>
+  </div>
 </div>

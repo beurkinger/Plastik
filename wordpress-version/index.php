@@ -49,8 +49,8 @@ if(is_search()) {
 	
 	
 		echo '<h2 class="search-content">
-			Résultats de la recherche avec le terme <br>
-			<span>&laquo; '.htmlspecialchars(urldecode(searchDisplayVar($query_string))).'&raquo;</span>
+			Résultats de la recherche pour<br>
+			<span>&laquo;&nbsp;'.htmlspecialchars(urldecode(searchDisplayVar($query_string))).'&nbsp;&raquo;</span>
 		  </h2>';
 	
 		foreach($result as $post) {
@@ -108,6 +108,24 @@ if(is_search()) {
 
 echo '</article>
   </div>
+</div>';
+
+} elseif (is_404()) {
+	
+echo '<div id="error">
+  <article>
+    <h1>
+      Erreur 404
+    </h1>
+    <p>
+      <strong>Cette page n\'existe pas ou n\'existe plus.</strong> <br/>
+      Nous vous prions de nous excusez pour la gène occasionnée.
+    </p>
+    <p>
+      Nous vous invitons à revenir à la <a href="/">page d\'accueil</a> de notre site.
+    </p>
+
+  </article>
 </div>';
 
 } elseif (have_posts()) {
